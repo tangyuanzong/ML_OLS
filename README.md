@@ -7,6 +7,8 @@
              data_2.py       多元线性回归
              
   一共两个数据文件：
-  
-             ex1data1.txt    一元线性回归数据
+             ex1data1.txt    一元线性回归数据
              ex1data2.txt    多元线性回归数据
+             
+  
+          
