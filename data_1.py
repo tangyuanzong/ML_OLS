@@ -59,7 +59,7 @@ def gradlient(theta,xdata,ydata,sigmal,l):  #参数更新
     
     return theta
 
-def OLS(xdata,ydata):                          #递归下降求解
+def OLS(xdata,ydata):                          #梯度下降求解
     start = time.clock()
     theta = [0,0]
     iters = 0
