@@ -35,12 +35,12 @@ def cost(theta,xdata,ydata,l):                  #代价函数
     ydata = mat (ydata)
     ydata = ydata.T
     for line in ydata:
-          yp = model(theta,xdata[idex ,:])
+          yp = model(theta,xdata[idex ,:])     
           yp = yp - ydata[idex ,:]
           yp = yp**2
           SUM = SUM + yp
           idex  =idex +1
-    return SUM/2/l
+    return SUM/2/l                              #返回代价
 
 def grad(theta,idex1,xdata,ydata,sigmal,l):     #梯度计算
     idex = 0
@@ -56,18 +56,18 @@ def grad(theta,idex1,xdata,ydata,sigmal,l):     #梯度计算
 def gradlient(theta,xdata,ydata,sigmal,l):     #参数更新
     idex1 = 0
     for line1 in theta:
-            theta[idex1] = theta[idex1] - sigmal * grad(theta,idex1,xdata,ydata,sigmal,l)
+            theta[idex1] = theta[idex1] - sigmal * grad(theta,idex1,xdata,ydata,sigmal,l)  #参数更新
             theta[idex1] = theta[idex1]
             idex1 = idex1+1
     
-    return theta
+    return theta                              #返回参数
 
 def Min_Max(xdata,ydata):                      #归一化数据
     index = 1
     while index < len(xdata[0,:]):
           item = xdata[:,index].max()
           item1 = xdata[:,index].min()
-          xdata[:,index] = (xdata[:,index] - item1)/(item-item1)
+          xdata[:,index] = (xdata[:,index] - item1)/(item-item1)   #归一化数据
           index = index+1
     return xdata,ydata
     
@@ -81,12 +81,12 @@ def OLS(xdata,ydata):                           #梯度下降求解函数
     cost_record = []
     it = []
     sigmal = 0.1
-    cost_val = cost(theta,xdata,ydata,l)
+    cost_val = cost(theta,xdata,ydata,l)           #计算代价
     cost_record.append(cost_val)
     it.append(iters)
     while iters <1500:
-          theta = gradlient(theta,xdata,ydata,sigmal,l)
-          cost_updata = cost(theta,xdata,ydata,l)
+          theta = gradlient(theta,xdata,ydata,sigmal,l) #计算梯度
+          cost_updata = cost(theta,xdata,ydata,l)       #计算代价
           iters = iters + 1
           cost_val = cost_updata
           cost_record.append(cost_val)
@@ -95,25 +95,25 @@ def OLS(xdata,ydata):                           #梯度下降求解函数
     return mat(theta).T,cost_record,it,theta
 
 
-def show(xArr,yArr,X,Y,thet):                         #显示数据
+def show(xArr,yArr,X,Y,thet):                         #显示回归平面
     fig = plt.figure()
     ax = Axes3D(fig)
-    plt.plot(xArr[:,1],xArr[:,2],yArr[0:,],'go',label='z1')
+    plt.plot(xArr[:,1],xArr[:,2],yArr[0:,],'go',label='z1')  #显示初始数据
     ax.set_xlabel('Area')
     ax.set_ylabel('Number')
     ax.set_zlabel('Price')
     plt.title('Linear Regression',size=30) 
-    x=np.arange(xArr[:,1].min(),xArr[:,1].max(),53.01)
+    x=np.arange(xArr[:,1].min(),xArr[:,1].max(),53.01)   
     x1=x.copy()
     y=np.arange(xArr[:,2].min(),xArr[:,2].max(),0.05)
     y1=y.copy()
     idex = 0
     for line in x1:
-        x1[idex] = (line - x1.min())/(x1.max()-x1.min())
+        x1[idex] = (line - x1.min())/(x1.max()-x1.min())     #归一化数据
         idex = idex +1
     idex = 0
     for line in y1:
-        y1[idex] = (line - y1.min())/(y1.max()-y1.min())
+        y1[idex] = (line - y1.min())/(y1.max()-y1.min())     #归一化数据
         idex = idex +1
    
     x,y=np.meshgrid(x,y)
